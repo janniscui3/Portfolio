@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Satzvervollständiger">
+  <meta name="author" content="Jannis Cui">
+
+  <title>Satzvervollständiger für Reviewprozesse</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- Other CSS -->
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="home">Navigation</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="info.html">Info</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Database Container-->
+  <div class="container database-container">
+    <div class="jumbotron" id="databaseJumbotron" data-toggle="collapse" data-target="#collapseDatabaseContent"
+      aria-expanded="false" aria-controls="collapseDatabaseContent">
+      <h1 class="display-4">1. Database-based approach</h1>
+      <p class="lead">Choose category and sentiment and press submit to get sentence</p>
+    </div>
+
+    <!-- Alternative 1-->
+    <div class="collapse" id="collapseDatabaseContent">
+      <div class="container">
+        <!-- Dropdowns-->
+        <div class="form-group d-flex">
+          <!-- Kategorie Dropdown -->
+          <div class="mr-2 flex-grow-1">
+            <label for="databaseDropdown"> Choose category:</label>
+            <select class="form-control" id="databaseDropdown">
+              <option value="" selected disabled>Choose here</option>
+              <option value="management">Project Management</option>
+              <option value="difficulty">Difficulty of the problem</option>
+              <option value="originality">Originality</option>
+              <option value="applicability">Applicability</option>
+              <option value="readability">Readability</option>
+              <option value="requirements">Requirements Analysis</option>
+              <option value="design">System Design</option>
+              <option value="implementation">System Implementation</option>
+            </select>
+          </div>
+
+          <!-- Sentiment Dropdown -->
+          <div class="mr-2">
+            <label for="sentimentDropdown"> Choose Sentiment: </label>
+            <select class="form-control" id="sentimentDatabaseDropdown">
+              <option value="positive">Positiv</option>
+              <option value="neutral">Neutral</option>
+              <option value="negative">Negativ</option>
+            </select>
+          </div>
+
+          <div class="mt-3">
+            <button type="button" class="btn btn-primary" onclick="fetchSentenceDatabase()"> Submit</button>
+          </div>
+        </div>
+
+
+        <!-- Result-->
+        <div class="card mt-4">
+          <div class="card-body">
+            <h5 class="card-title">Result</h5>
+            <textarea id="resultContentDatabase" rows="6"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Machine Learning (Local-Hosted) Container-->
+  <div class="container">
+    <div class="jumbotron" id="LocalHostJumbotron" data-toggle="collapse" data-target="#collapseLocalHostContent">
+      <h1 class="display-4">2. Machine-Learning-based approach (Local-Hosted)</h1>
+      <p class="lead">Send bullet points and get sentences back.</p>
+    </div>
+
+    <!-- Textbox Area -->
+    <div class="collapse" id="collapseLocalHostContent">
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Write bullet points</h5>
+            <form>
+              <div class="form-group">
+                <label for="textareaDatabase">Enter your text:</label>
+                <textarea class="form-control" id="textareaLocalHost" rows="4"></textarea>
+              </div>
+              <button type="button" class="btn btn-primary" onclick="processTextLocalHost()">Submit</button>
+            </form>
+          </div>
+        </div>
+        <div class="card mt-4">
+          <div class="card-body">
+            <h5 class="card-title"> Result </h5>
+            <textarea id="resultLocalHost" rows="6"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Machine Learning (Cloud-Hosted) Container-->
+  <div class="container">
+    <div class="jumbotron" id="CloudHostJumbotron" data-toggle="collapse" data-target="#collapseCloudHostContent">
+      <h1 class="display-4">3. Machine-Learning-based approach (Cloud-Hosted)</h1>
+      <p class="lead">Send bullet points and get sentences back.</p>
+    </div>
+
+    <!-- Textbox Area -->
+    <div class="collapse" id="collapseCloudHostContent">
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Write bullet points</h5>
+            <form>
+              <div class="form-group">
+                <label for="textareaCloudHost">Enter your text:</label>
+                <textarea class="form-control" id="textareaCloudHost" rows="4"></textarea>
+              </div>
+              <button type="button" class="btn btn-primary" onclick="processTextCloudHost()">Submit</button>
+            </form>
+          </div>
+        </div>
+        <div class="card mt-4">
+          <div class="card-body">
+            <h5 class="card-title"> Result </h5>
+            <textarea id="resultCloudHost" rows="6""></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Bootstrap JavaScript, Popper.js -->
+  <script src=" https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Javascript -->
+  <script type="text/javascript" src="static/js/script.js"></script>
+</body>
+
+</html>

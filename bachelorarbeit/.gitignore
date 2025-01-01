@@ -1,0 +1,6 @@
+\Literatur
+random.txt
+\__pycache__
+\.venv
+\app\__pycache__
+app/model/orca-mini-3b-gguf2-q4_0.gguf

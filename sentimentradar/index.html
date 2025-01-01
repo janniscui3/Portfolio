@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Autor: Timo Eisert (7470259)-->
+
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top" onload="javascript:initiatePage()">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Übersicht</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            
+
+       
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+            
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    
+                    <div class="d-flex flex-row align-items-center justify-content-between">
+                        <div class="mt-3">
+                            <p>Von:</p>
+                        </div>
+                        <div class="ml-1">
+                            <input type="date" id="start" name="trip-start" class="form-control bt-date-field bt-date-sep-from hasDatepicker"> 
+                             
+                                
+                        </div>
+                        <div class="mt-3 ml-2">
+                            <p>Bis:</p>
+                        </div>
+                        <div class="ml-1">
+                            <input type="date" id="end" name="trip-start" class="form-control bt-date-field bt-date-sep-from hasDatepicker">  
+                        </div>
+                        
+                        <!--
+                        <div class="ml-2">
+                            <input type="date" id="end" name="trip-start" class="form-control bt-date-field bt-date-sep-from hasDatepicker" min="2018-01-01" max="2018-12-31">    
+                        </div>
+                    -->
+                    </div>
+                    
+
+                    
+                    <!-- Topbar Search -->
+                    <ul class="navbar-nav ml-auto">
+                        <form
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                    aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        
+            
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+
+                <!-- Page Heading -->
+                <div class="container-fluid">
+
+                    <div class="d-flex flex-row align-items-center">
+                        <p class="h3 mb-3 text-gray-800 mr-auto">Dashboard</p>
+
+                        <div class="mb-3 col-xl-2 col-lg-3 ml-auto">
+                            
+                            <p>Bereits analysierte Reden:</p>
+                            
+                            
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" id="progressbar1" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                            </div>    
+                        </div>
+
+                    </div>
+
+
+                    <!--
+                    ###########################
+                    Graphs are implemented here
+                    ###########################
+                    -->
+                    <!-- Content Row -->
+
+                    <div class="row">
+                        <!-- Token Line Chart -->
+                        <div class="col-xl-12 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div
+                                class="card-header py-3 d-flex flex-row align-items-center">
+                                <h6 class="m-0 font-weight-bold text-primary mr-auto">Häufigkeitsverteilung der Tokens in Reden</h6> 
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="token_line_chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+
+
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+                        <!-- POS Vertical Bar Chart -->
+                        <div class="col-xl-12 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div
+                                class="card-header py-3 d-flex flex-row align-items-center">
+                                <h6 class="m-0 font-weight-bold text-primary mr-auto">Häufigkeitsverteilung der POS in Reden</h6> 
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="pos_bar_chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> 
+                    
+                    <!-- Content Row -->
+
+                    <div class="row">
+                        <!-- Sentiment Radar Chart -->
+                        <div class="col-xl-12 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div
+                                class="card-header py-3 d-flex flex-row align-items-center">
+                                <h6 class="m-0 font-weight-bold text-primary mr-auto">Sentimentverteilung</h6> 
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="sentiment_radar_chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   
+                    </div>
+
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+                        <!-- NamedEnt Line Chart -->
+                        <div class="col-xl-12 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div
+                                class="card-header py-3 d-flex flex-row align-items-center">
+                                <h6 class="m-0 font-weight-bold text-primary mr-auto">Häufigkeitsverteilung Named Entities</h6> 
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="namedent_line_chart"></canvas>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+
+
+
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+                        <!-- Speaker Bar Chart -->
+                        <div class="col-xl-12 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div
+                                class="card-header py-3 d-flex flex-row align-items-center">
+                                <h6 class="m-0 font-weight-bold text-primary mr-auto">Häufigkeitsverteilung der Redner</h6> 
+                                </div>
+                                <!-- Card Body -->
+                                
+
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="speaker_bar_chart"></canvas>
+                                    </div>
+                                    <img id="picture" src="" alt="" style="height: auto; width: auto; max-height: 150px; background-color: white; position: absolute; top:100px; left:100px; opacity: 0;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+                        <!-- Speech Viewer -->
+                        <div class="col-xl-12 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div
+                                class="card-header py-3 d-flex flex-row align-items-center">
+                                <h6 class="m-0 font-weight-bold text-primary mr-auto">Rede</h6> 
+                                <div class="align-items-center flex-row ml-auto d-flex">
+                                    <p class="mt-3">Protokoll:</p>
+                                    <div class="wrapper m-0 ml-1" style="width:200px; padding:0px; height: 40px;">
+                                        <select name=""  id="select1" class="form-control" onfocus="this.size=5;" onblur="this.size=1;" onchange="this.size=1; this.blur(); location = this.value;">
+                                        
+                                    </select></div>
+                                    <p class="mt-3 ml-2">Tagesordnungspunkt:</p>
+                                    <div class="wrapper m-0 ml-1" style="width:250px; padding:0px; height: 40px;">
+                                        <select name=""  id="select2" class="form-control" onfocus="this.size=5;" onblur="this.size=1;" onchange="this.size=1; this.blur(); location = this.value;">
+                                        
+                                    </select></div>
+
+                                    <p class="mt-3 ml-2">Rede:</p>
+                                    <div class="wrapper m-0 ml-1" style="width:250px; padding:0px; height: 40px;">
+                                        <select name=""  id="select3" class="form-control" onfocus="this.size=5;" onblur="this.size=1;" onchange="this.size=1; this.blur(); location = this.value;">
+                                        
+                                    </select></div>
+                                </div>
+                                </div>
+                                <!-- Card Body -->
+                                
+                                <div>
+                                    <div>
+                                        <p id="color-text" style="margin-left:20px">-</p>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>   
+
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2021</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+
+    <script src="scripts/mainscript.js"></script>
+    <script src="scripts/tokenlinechart.js"></script>
+    <script src="scripts/posbarchart.js"></script>
+    <script src="scripts/sentimentradarchart.js"></script>
+    <script src="scripts/namedentlinechart.js"></script>
+    <script src="scripts/speakerbarchart.js"></script>
+    <script src="scripts/speechfield.js"></script>
+</body>
+
+</html>
