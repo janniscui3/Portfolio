@@ -265,6 +265,9 @@ section {
 
 #about {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .about-containers {
@@ -276,6 +279,7 @@ section {
 .about-details-container {
   justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
 
 .about-containers,
@@ -306,6 +310,9 @@ section {
 .section-container {
   gap: 4rem;
   height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .section__pic-container {
